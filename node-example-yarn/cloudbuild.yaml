@@ -1,0 +1,9 @@
+steps:
+# Install dependencies
+- name: node:10.15.1
+  entrypoint: yarn
+  args: ['install']
+# Run tests
+- name: node:10.15.1
+  entrypoint: yarn
+  args: ['test']
