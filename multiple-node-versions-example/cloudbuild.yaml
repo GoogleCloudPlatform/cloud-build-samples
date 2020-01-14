@@ -1,0 +1,13 @@
+steps:
+# Install dependencies
+- name: node:$_NODE_VERSION
+  entrypoint: npm
+  args: ['install']
+# Run tests
+- name: node:$_NODE_VERSION
+  entrypoint: npm
+  args: ['test']
+# Run custom commands
+- name: node:$_NODE_VERSION
+  entrypoint: npm
+  args: ['run', 'test_mocha']
