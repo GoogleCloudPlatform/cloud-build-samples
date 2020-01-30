@@ -1,13 +1,13 @@
 steps:
 # Install dependencies
-- name: node:10.15.1
+- name: node
   entrypoint: npm
   args: ['install']
 # Run tests
-- name: node:10.15.1
+- name: node
   entrypoint: npm
   args: ['test']
 # Run custom commands
-- name: node:10.15.1
+- name: node
   entrypoint: npm
   args: ['run', 'build']
