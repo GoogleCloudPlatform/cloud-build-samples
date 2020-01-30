@@ -1,9 +1,13 @@
 steps:
 # Install dependencies
-- name: node:10.15.1
+- name: node
   entrypoint: yarn
   args: ['install']
 # Run tests
-- name: node:10.15.1
+- name: node
   entrypoint: yarn
   args: ['test']
+# Run custom commands
+- name: node
+  entrypoint: npm
+  args: ['run', 'build']
