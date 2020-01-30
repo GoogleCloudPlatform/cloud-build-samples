@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node .",
     "test": "mocha test --exit",
+    "build": "mocha test --exit"
   },
   "author": "",
   "license": "ISC",
