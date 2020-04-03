@@ -1,0 +1,9 @@
+steps: 
+- name: gcr.io/$PROJECT_ID/firebase
+  entrypoint: bash
+  args: ['-c', 'firebase deploy --project=$PROJECT_ID --only=hosting --token=$$FIREBASE_TOKEN']
+  secretEnv: ["FIREBASE_TOKEN"]
+secrets: 
+- kmsKeyName: 'projects/gcbfirebase/locations/global/keyRings/firebasegcbkeyring/cryptoKeys/firebasegcbkey'
+  secretEnv: 
+    FIREBASE_TOKEN: 'your-encrypted-firebase-token'
