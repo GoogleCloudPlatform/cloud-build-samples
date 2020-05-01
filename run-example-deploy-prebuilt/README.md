@@ -1,3 +1,5 @@
-# run-example-deploy-prebuilt
-Code examples used in Deploying on Cloud Run using Cloud Build
-https://cloud.google.com/cloud-build/docs/deploying-builds/deploy-cloud-run
+# run-example-builddeploy
+Code example used in the official Cloud Build documentation
+https://cloud.google.com/cloud-build/docs/deploying-builds/deploy-cloud-run.
+
+For instructions on running this code see  [Deploying on Cloud Run](https://cloud.google.com/cloud-build/docs/deploying-builds/deploy-cloud-run).
