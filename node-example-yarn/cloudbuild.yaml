@@ -9,5 +9,5 @@ steps:
   args: ['test']
 # Run custom commands
 - name: node
-  entrypoint: npm
+  entrypoint: yarn
   args: ['run', 'build']
