@@ -5,7 +5,7 @@ steps:
   - 'deploy'
   - 'cloudrunservice'
   - '--image'
-  - 'gcr.io/gcbdocs/hello'
+  - 'us-docker.pkg.dev/cloudrun/container/hello'
   - '--region'
   - 'us-central1'
   - '--platform'
