@@ -1,7 +1,0 @@
-steps:
-  - name: golang
-    args: ['go', 'build', '.']
-  artifacts:
-    objects:
-      location: `gs://hello-world`
-      paths: [`bar`]
