@@ -12,17 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START cloudbuild_python_function]
-def hello_world(request):
-    name = "World"
+# [START cloudbuild_python_flask]
+import os
 
-    request_json = request.get_json(silent=True)
-    request_args = request.args
+from flask import Flask
 
-    if request_json:
-        name = request_json.get("name")
-    if request_args:
-        name = request_args.get("name") 
+app = Flask(__name__)
 
+
+@app.route("/")
+def hello_world():
+    name = os.environ.get("NAME", "World")
     return f"Hello {name}!"
-# [END cloudbuild_python_function]
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+# [END cloudbuild_python_flask]

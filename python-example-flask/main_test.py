@@ -12,25 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import flask
+import os
 import pytest
 
 import main
 
 
-# Create a fake "app" for generating test request contexts.
-@pytest.fixture(scope="module")
-def app():
-    return flask.Flask(__name__)
+@pytest.fixture
+def client():
+    main.app.testing = True
+    return main.app.test_client()
 
 
-def test_hello_world(app):
-    with app.test_request_context():
-        res = main.hello_world(flask.request)
-        assert 'Hello World!' in res
+def test_handler_no_env_variable(client):
+    r = client.get("/")
+
+    assert r.data.decode() == "Hello World!"
+    assert r.status_code == 200
 
 
-def test_hello_name(app):
-    with app.test_request_context(query_string={'name': 'test'}):
-        res = main.hello_world(flask.request)
-        assert 'Hello test!' in res
+def test_handler_with_env_variable(client):
+    os.environ["NAME"] = "Foo"
+    r = client.get("/")
+
+    assert r.data.decode() == "Hello Foo!"
+    assert r.status_code == 200
