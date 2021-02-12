@@ -1,3 +1,3 @@
 # quickstart-deploy
 Code example used in Deploy quickstart
-https://cloud.google.com/cloud-build/docs/quickstart-deploy
+https://cloud.google.com/build/docs/quickstart-deploy
