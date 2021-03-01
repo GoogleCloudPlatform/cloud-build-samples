@@ -1,5 +1,5 @@
 steps:
-  - name: 'google/cloud-sdk'
+  - name: golang
     entrypoint: /bin/bash
     args: 
      - '-c'
