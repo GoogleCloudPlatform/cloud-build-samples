@@ -1,3 +1,3 @@
 steps:
-  - name: golang
-    args: ['go', 'run', 'main.go']
+  - name: ubuntu
+    args: ['ls', '-a']
