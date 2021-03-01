@@ -1,4 +1,3 @@
 steps:
-  - name: golang
-    entrypoint: 'go'
-    args: ['run', 'main.go']
+  - name: python
+    args: ['python', 'main.py']
