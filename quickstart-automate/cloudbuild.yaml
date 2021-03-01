@@ -1,7 +1,4 @@
 steps:
   - name: golang
     entrypoint: /bin/bash
-    args: 
-     - '-c'
-     - |
-       cd quickstart-automate && ls -a
+    args: ['go', 'run', 'main.go']
