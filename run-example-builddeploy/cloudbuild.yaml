@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START build_run_example_builddeploy]
+# [START cloudbuild_run_example_builddeploy]
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
@@ -25,4 +25,4 @@ steps:
   args: ['run', 'deploy', 'myservice', '--image', 'gcr.io/$PROJECT_ID/myimage', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 images:
 - gcr.io/$PROJECT_ID/myimage
-# [END build_run_example_builddeploy]
+# [END cloudbuild_run_example_builddeploy]
