@@ -11,41 +11,53 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+// [START build_python_yaml]
+// [START build_python_dependencies_yaml]
 steps:
   # Install dependencies
   - name: python
     entrypoint: pip
     args: ["install", "-r", "requirements.txt", "--user"]
+// [END build_python_dependencies_yaml]
 
+  // [START build_python_tests_yaml]
   # Run unit tests
   - name: python
     entrypoint: python
     args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"] 
+  // [END build_python_tests_yaml]
 
+  // [START build_python_image_yaml]
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
            'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', '.']
+  // [END build_python_image_yaml]
 
+  // [START build_python_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA']
-
+  // [END build_python_push_yaml]
+  
+  // [START build_python_deploy_yaml]
   # Deploy to Cloud Run
   - name: google/cloud-sdk
     args: ['gcloud', 'run', 'deploy', 'helloworld', 
            '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', 
            '--region', 'us-central1', '--platform', 'managed', 
            '--allow-unauthenticated']
-
+  // [END build_python_deploy_yaml]
+  
+// [START build_python_logs_yaml]
 # Save test logs to Google Cloud Storage
 artifacts:
   objects:
     location: gs://$_BUCKET_NAME/
     paths:
       - ${SHORT_SHA}_test_log.xml
-
+// [END build_python_logs_yaml]
 # Store images in Google Artifact Registry
 images:
   - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
+// [END build_python_yaml]
