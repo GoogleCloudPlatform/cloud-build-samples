@@ -13,25 +13,15 @@
 # limitations under the License.
 
 steps:
-  # Initialize the module
-  - name: golang
-    args: ['go', 'mod', 'init', 'github.com/GoogleCloudPlatform/cloud-build-samples/golang']
-
-  # Clean up dependencies
-  - name: golang
-    args: ['go', 'mod', 'tidy']
-
-  # Build application
-  - name: golang
-    args: ['go', 'build', '.']
-
   # Run tests and save to file
   - name: golang
     entrypoint: /bin/bash
     args: 
       - -c
       - |
-        go test . -v -json > ${SHORT_SHA}_test_log.json
+        go get -u github.com/jstemmer/go-junit-report
+        2>&1 go test -timeout 1m -v "${1:-./...}" | tee sponge.log
+        /go/bin/go-junit-report -set-exit-code < sponge.log > ${SHORT_SHA}_test_log.xml
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
@@ -40,7 +30,7 @@ steps:
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA']
 
   # Deploy to Cloud Run
   - name: google/cloud-sdk
@@ -54,7 +44,7 @@ artifacts:
   objects:
     location: gs://$_BUCKET_NAME/
     paths:
-      - ${SHORT_SHA}_test_log.json
+      - ${SHORT_SHA}_test_log.xml
 
 # Store images in Google Artifact Registry
 images:
