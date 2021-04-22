@@ -20,7 +20,7 @@ steps:
       - -c
       - |
         go get -u github.com/jstemmer/go-junit-report
-        2>&1 go test -timeout 1m -v "${1:-./...}" | tee sponge.log
+        2>&1 go test -timeout 1m -v ./... | tee sponge.log
         /go/bin/go-junit-report -set-exit-code < sponge.log > ${SHORT_SHA}_test_log.xml
 
   # Docker Build
