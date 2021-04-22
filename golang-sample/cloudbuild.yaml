@@ -36,8 +36,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'helloworld', 
            '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', 
-           '--region', 'us-central1', '--platform', 'managed', 
-           '--allow-unauthenticated']
+           '--region', 'us-central1', '--platform', 'managed']
 
 # Save test logs to Google Cloud Storage
 artifacts:
