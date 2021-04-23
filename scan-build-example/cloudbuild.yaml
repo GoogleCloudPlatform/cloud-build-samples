@@ -14,39 +14,45 @@
 
 # [START cloudbuild_scan_build_buildfile]
 steps:
-   - id: build
+   - id: build and inspect
      name: gcr.io/cloud-builders/docker
      entrypoint: /bin/bash
      args:
      - -c
      - |
-       docker build -t us-central1-docker.pkg.dev/$_PROJECT_ID/ods-build-repo/ods-test:latest -f ./Dockerfile . &&
-       docker image inspect us-central1-docker.pkg.dev/$_PROJECT_ID/ods-build-repo/ods-test:latest --format \
-       '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt &&
+       docker build -t $_IMAGE_NAME -f ./Dockerfile .
+       docker image inspect $_IMAGE_NAME --format \
+         '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
        cat image-digest.txt
+
    - id: scan
      name: gcr.io/cloud-builders/gcloud
      entrypoint: /bin/bash
      args:
      - -c
      - |
-       gcloud artifacts docker images scan us-central1-docker.pkg.dev/$_PROJECT_ID/ods-build-repo/ods-test:latest \
+       gcloud artifacts docker images scan $_IMAGE_NAME \
        --format='value(response.scan)' > /workspace/scan_id.txt
+
    - id: severity check
      name: gcr.io/cloud-builders/gcloud
      entrypoint: /bin/bash
      args:
      - -c
-     - |
-       gcloud artifacts docker images list-vulnerabilities $(cat /workspace/scan_id.txt) \
-       --format='value(vulnerability.effectiveSeverity)' | if grep -Fxq $_SEVERITY; \
-       then echo 'Failed vulnerability check' && exit 1; else exit 0; fi
-   - id: push
-     name: gcr.io/cloud-builders/docker
-     entrypoint: /bin/bash
-     args:
-     - -c
-     - |
-       docker push us-central1-docker.pkg.dev/$_PROJECT_ID/ods-build-repo/ods-test:latest
-images: ['us-central1-docker.pkg.dev/$_PROJECT_ID/ods-build-repo/ods-test:latest']
+     - | # Check the vulnerabilities and exit if it meets severity level
+       gcloud artifacts docker images list-vulnerabilities \
+        $(cat /workspace/scan_id.txt) --format='value(vulnerability.effectiveSeverity)' \
+        | if grep -Fxq $_SEVERITY 
+          then echo 'Failed vulnerability check'
+          exit 1 
+          fi
+
+options:
+  dynamic_substitutions: true
+
+substitutions:
+  _IMAGE_NAME: us-central1-docker.pkg.dev/${PROJECT_ID}/ods-build-repo/ods-test:latest
+
+# Store the image in artifact registry
+images: [$_IMAGE_NAME]
 # [END cloudbuild_scan_build_buildfile]
