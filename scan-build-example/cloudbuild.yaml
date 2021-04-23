@@ -1,0 +1,58 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START cloudbuild_scan_build_buildfile]
+steps:
+   - id: build and inspect
+     name: gcr.io/cloud-builders/docker
+     entrypoint: /bin/bash
+     args:
+     - -c
+     - |
+       docker build -t $_IMAGE_NAME -f ./Dockerfile .
+       docker image inspect $_IMAGE_NAME --format \
+         '{{index .RepoTags 0}}@{{.Id}}' > /workspace/image-digest.txt
+       cat image-digest.txt
+
+   - id: scan
+     name: gcr.io/cloud-builders/gcloud
+     entrypoint: /bin/bash
+     args:
+     - -c
+     - |
+       gcloud artifacts docker images scan $_IMAGE_NAME \
+       --format='value(response.scan)' > /workspace/scan_id.txt
+
+   - id: severity check
+     name: gcr.io/cloud-builders/gcloud
+     entrypoint: /bin/bash
+     args:
+     - -c
+     - | # Check the vulnerabilities and exit if it meets severity level
+       gcloud artifacts docker images list-vulnerabilities \
+        $(cat /workspace/scan_id.txt) --format='value(vulnerability.effectiveSeverity)' \
+        | if grep -Fxq $_SEVERITY 
+          then echo 'Failed vulnerability check'
+          exit 1 
+          fi
+
+options:
+  dynamic_substitutions: true
+
+substitutions:
+  _IMAGE_NAME: us-central1-docker.pkg.dev/${PROJECT_ID}/ods-build-repo/ods-test:latest
+
+# Store the image in artifact registry
+images: [$_IMAGE_NAME]
+# [END cloudbuild_scan_build_buildfile]
