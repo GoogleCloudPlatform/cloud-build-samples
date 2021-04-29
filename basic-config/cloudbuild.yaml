@@ -15,37 +15,18 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '$_IMAGE_NAME', '.']
+    args: ['build', '-t', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage', 
+           '.']
 
-  # Entrypoint Example
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: '/bin/bash'
-    args: 
-      - '-c'
-      - |
-        output=$(docker run $_IMAGE_NAME)
-        if [[ "$output" != "Hello World!" ]]
-        then exit 1
-        fi
-        docker push $_IMAGE_NAME
-
-  # Timeout and environment variables
-  - name: 'gcr.io/cloud-builders/gcloud'
+  # Entrypoint, timeout and environment variables
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
     timeout: 240s
-    args: ['compute', 'instances', 
-           'create-with-container', 'my-vm-name',
-           '--container-image', '$_IMAGE_NAME']
+    args: ['artifacts', 'docker', 'images', 'scan', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
     env:
-      - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      - 'CLOUDSDK_CORE_PROJECT=${PROJECT_ID}'
 
-# Subsitutions
-options:
-  dynamic_substitutions: true
-
-substitutions:
-  _IMAGE_NAME: 'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage'
-  
-# Store the image in artifact registry
-images: [$_IMAGE_NAME]
 # Store image in Artifact Registry
+images: ['us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
