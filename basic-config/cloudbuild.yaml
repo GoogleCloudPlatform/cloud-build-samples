@@ -24,7 +24,6 @@ steps:
       - '-c'
       - |
         output=$(docker run $_IMAGE_NAME)
-        echo $output
         if [[ "$output" != "Hello World!" ]]
         then exit 1
         fi
