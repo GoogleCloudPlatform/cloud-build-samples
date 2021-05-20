@@ -1,0 +1,8 @@
+steps:
+- name: 'bash'
+  args:
+   - 'sleep'
+   - '30'
+timeout: 40s
+options: 
+    machineType: 'N1_HIGHCPU_8'
