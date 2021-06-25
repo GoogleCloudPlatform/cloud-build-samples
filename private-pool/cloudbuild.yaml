@@ -14,11 +14,24 @@
 
 # [START cloudbuild_private_curl]
 steps:
-  - name: gcr.io/cloud-builders/curl
+  - id: Get Private Artifactory Address
+    name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    args: 
+      - -c
+      - |
+        gcloud compute instances describe jfrog \
+        --zone us-central1-a \
+        --format="value(networkInterfaces.networkIP)" >> _INTERNAL_IP_ADDRESS
+
+  - id: Pull from Private Artifactory
+    name: gcr.io/cloud-builders/curl
+    entrypoint: /bin/bash
     args:
-      - -u 
-      - admin:password
-      - http://${_INTERNAL_IP_ADDRESS}:8081/artifactory/example-repo-local/helloworld.txt
+      - -c
+      - |
+        curl -u admin:password \
+        http://$(cat _INTERNAL_IP_ADDRESS):8081/artifactory/example-repo-local/helloworld.txt
 # [END cloudbuild_private_curl]
 
 # [START cloudbuild_private_worker_pool]
