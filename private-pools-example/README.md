@@ -184,16 +184,16 @@ Operation "operations/pssn.p24-381015962062-12a0a42b-3152-41d0-aaff-0ab4cdb1bde8
 
 Now we can create our Private Pool. We will be editing the `privatepool.yaml` config file to configure the Private Pool settings.
 
-In line 2 of `privatepool.yaml`, replace `<add-project-number>` and `<add-vpc-name>` with your GCP Project number and the value stored in `$VPC_NAME` respectively. 
+In line 17 of `privatepool.yaml`, replace `<add-project-number>` and `<add-vpc-name>` with your GCP Project number and the value stored in `$VPC_NAME` respectively. 
 
 ```
     peeredNetwork: projects/<add-project-number>/global/networks/<add-vpc-name>
 ```
 
-If you prefer to change the machine type, disk size, or disable Public IPs on the Cloud Build Private Pool, you can do so in lines 4-6. 
+Let's now create the Private Pool. 
 
 ```
-gcloud alpha builds worker-pools create $PRIVATE_POOL_NAME --config-from-file privatepool.yaml --region $REGION
+gcloud builds worker-pools create $PRIVATE_POOL_NAME --config-from-file privatepool.yaml --region $REGION
 ```
 
 Your output should look similar to the below.
@@ -214,7 +214,7 @@ We will be editing the `cloudbuild.yaml` build config file.
 
 To simulate accessing private resources in our VPC, we will run a `curl` build step that will issue a request successfully to our private sample application on GKE.
 
-In line 3 of `cloudbuild.yaml`, replace `<add-ip-address>` with the IP address for our private application on GKE, which we can access by running `echo $ILB`.
+In line 22 of `cloudbuild.yaml`, replace `<add-ip-address>` with the IP address for our private application on GKE, which we can access by running `echo $ILB`.
 
 ```
   args: ['<add-ip-address>:80']
