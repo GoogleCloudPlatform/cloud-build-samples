@@ -1,0 +1,6 @@
+networkConfig:
+    peeredNetwork: projects/<add-project-number>/global/networks/<add-vpc-name>
+workerConfig:
+    machineType: e2-standard-32
+    diskSizeGb: 100
+    noExternalIp: false
