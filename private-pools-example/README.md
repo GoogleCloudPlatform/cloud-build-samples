@@ -206,7 +206,7 @@ gcloud builds worker-pools create $PRIVATE_POOL_NAME --config-from-file privatep
 Your output should look similar to the below.
 ```
 Creating worker pool...done.                                                                                                              
-Created [https://cloudbuild.googleapis.com/v1beta1/projects/agmsb-k8s/locations/us-west1/workerPools/projects%2F381015962062%2Flocations%2Fus-west1%2FworkerPools%2Fsandbox-privatepool].
+Created [https://cloudbuild.googleapis.com/v1/projects/agmsb-k8s/locations/us-west1/workerPools/projects%2F381015962062%2Flocations%2Fus-west1%2FworkerPools%2Fsandbox-privatepool].
 NAME                 CREATE_TIME                STATE
 sandbox-privatepool  2021-07-28T14:48:37+00:00  RUNNING
 ```
@@ -284,7 +284,7 @@ gcloud container clusters delete $GKE_CLUSTER_NAME --region $REGION
 
 Delete the Cloud Build Private Pool. 
 ```
-gcloud alpha builds worker-pools delete $PRIVATE_POOL_NAME --region $REGION
+gcloud builds worker-pools delete $PRIVATE_POOL_NAME --region $REGION
 ```
 
 Delete the VPC.
