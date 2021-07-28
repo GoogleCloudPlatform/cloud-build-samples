@@ -1,8 +1,8 @@
 # Accessing private resources using Cloud Build Private Pools
 
-In this repository, we will demonstrate the below functionality of Cloud Build Private Pools:
+In this repository, we will demonstrate the below functionality of [Cloud Build private pools](https://cloud.google.com/build/docs/private-pools/private-pools-overview):
 
-* Private connectivity to resources in your VPC
+* Private connectivity to resources in your VPC network
 * Running builds within a specific region on Google-managed workers
 * Large range of machine types configurable for workers that run your build
 
