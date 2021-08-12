@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START cloudbuild_private_pools_tutorial]
 # [START cloudbuild_private_curl]
 steps:
   - id: Get Private Artifactory Address
@@ -36,5 +37,7 @@ steps:
 
 # [START cloudbuild_private_worker_pool]
 options:
-  workerPool: 'projects/${PROJECT_ID}/locations/us-central1/workerPools/jfrog-pool'
+  pool:
+    name: 'projects/${PROJECT_ID}/locations/us-central1/workerPools/jfrog-pool'
 # [END cloudbuild_private_worker_pool]
+# [END cloudbuild_private_pools_tutorial]
