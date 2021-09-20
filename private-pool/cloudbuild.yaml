@@ -31,7 +31,7 @@ steps:
     args:
       - -c
       - |
-        curl -u admin:password \
+        curl -u admin:password --connect-timeout 10.00 \
         http://$(cat _INTERNAL_IP_ADDRESS):8081/artifactory/example-repo-local/helloworld.txt
 # [END cloudbuild_private_curl]
 
