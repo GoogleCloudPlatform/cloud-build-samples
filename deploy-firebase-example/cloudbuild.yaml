@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START cloudbuild_firebase_deploy]
 steps: 
 - name: gcr.io/$PROJECT_ID/firebase
   args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']
+# [END cloudbuild_firebase_deploy]
