@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START cloudbuild_npm_node]
 steps:
 # Install dependencies
 - name: node
@@ -25,3 +26,4 @@ steps:
 - name: node
   entrypoint: npm
   args: ['run', 'build']
+# [END cloudbuild_npm_node]
