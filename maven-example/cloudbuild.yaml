@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+# [START cloudbuild_maven]
 steps:
   - name: maven:3-jdk-8
     entrypoint: mvn
@@ -22,3 +22,4 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "gcr.io/$PROJECT_ID/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
 images: ["gcr.io/$PROJECT_ID/hellospring"]
+# [END cloudbuild_maven]
