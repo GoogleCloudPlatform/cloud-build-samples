@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START cloudbuild_remote_builders]
 steps:
 - name: 'bash'
   id: bash-1
@@ -35,3 +36,4 @@ steps:
    - 'sleep'
    - '30'
   waitFor: ['child-build']
+# [END cloudbuild_remote_builders]
