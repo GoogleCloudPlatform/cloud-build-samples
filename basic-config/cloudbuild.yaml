@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START cloudbuild_basic_config]
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
@@ -35,3 +36,4 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central1'
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+# [END cloudbuild_basic_config]
