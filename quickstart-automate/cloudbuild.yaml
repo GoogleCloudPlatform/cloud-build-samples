@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START cloudbuild_quickstart_automate]
 steps:
   - name: golang
     args: ['go', 'run', 'quickstart-automate/main.go']
+# [END cloudbuild_quickstart_automate]
