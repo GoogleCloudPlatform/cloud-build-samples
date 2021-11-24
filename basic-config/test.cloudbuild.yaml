@@ -1,5 +1,6 @@
 steps:
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - id: test-builds-successfully
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
     script: |
       cd basic-config
       gcloud builds submit --config cloudbuild.yaml
