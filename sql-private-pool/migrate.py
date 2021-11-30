@@ -16,16 +16,12 @@ import app
 
 
 def migrate():
-    try:
-        db = app.connect_db()
-        with db.connect() as conn:
-            row = conn.execute("SELECT NOW() as now").fetchone()
-            data = dict(row)
-            return data["now"]
-    except Exception as e:
-        return f"Connection not successful: {e}"
+    db = app.connect_db()
+    with db.connect() as conn:
+        row = conn.execute("SELECT NOW() as now").fetchone()
+        data = dict(row)
+        print(data["now"])
 
 
 print("Apply migration...")
-print("Migration result:", migrate())
-print("Success.")
+migrate()
