@@ -1,0 +1,12 @@
+steps:
+  - id: test-builds-successfully
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    script: |
+      cd basic-config
+      gcloud builds submit --config cloudbuild.yaml
+
+  - id: cleanup
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    script: |
+      gcloud compute instances delete my-vm-name --zone us-central1-a
+      gcloud artifacts docker images delete us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage

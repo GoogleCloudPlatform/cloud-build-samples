@@ -22,7 +22,7 @@ steps:
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', '-image', 
+    args: ['push', 
            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
 
   # Entrypoint, timeout and environment variables
