@@ -13,7 +13,6 @@
          "name": "gcr.io/cloud-builders/docker",
          "args": [
             "push",
-            "-image",
             "us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage"
          ]
       },
