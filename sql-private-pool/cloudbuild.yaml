@@ -24,6 +24,7 @@ steps:
 
   - id: "migration"
     name: "${_IMAGE_NAME}"
+    dir: sql-proxy
     env:
       - "DATABASE_NAME=mydatabase"
       - "DATABASE_USER=myuser"
