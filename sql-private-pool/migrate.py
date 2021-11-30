@@ -20,7 +20,7 @@ def migrate():
     with db.connect() as conn:
         row = conn.execute("SELECT NOW() as now").fetchone()
         data = dict(row)
-        print(data["now"])
+        print("Performed migration at ", data["now"])
 
 
 print("Apply migration...")
