@@ -31,7 +31,7 @@ steps:
       - "DATABASE_HOST=${_DATABASE_HOST}"
     secretEnv:
       - DATABASE_PASS
-    entrypoint: python
+    entrypoint: python   # for example
     args: ["migrate.py"] # for example
 
 substitutions:
