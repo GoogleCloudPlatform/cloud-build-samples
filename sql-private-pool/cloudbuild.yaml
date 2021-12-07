@@ -16,7 +16,7 @@
 steps:
   - id: "docker-build"
     name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "${_IMAGE_NAME}", "sql-proxy/."]
+    args: ["build", "-t", "${_IMAGE_NAME}", "sql-private-pool/."]
 
   - id: "docker-push"
     name: "gcr.io/cloud-builders/docker"
@@ -24,7 +24,7 @@ steps:
 
   - id: "migration"
     name: "${_IMAGE_NAME}"
-    dir: sql-proxy
+    dir: sql-private-pool
     env:
       - "DATABASE_NAME=mydatabase"
       - "DATABASE_USER=myuser"
