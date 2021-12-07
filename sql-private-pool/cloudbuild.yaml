@@ -32,7 +32,7 @@ steps:
     secretEnv:
       - DATABASE_PASS
     entrypoint: python
-    args: ["migrate.py"]
+    args: ["migrate.py"] # for example
 
 substitutions:
   _DATABASE_PASSWORD_KEY: database_password
