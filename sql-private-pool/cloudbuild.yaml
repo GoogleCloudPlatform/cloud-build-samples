@@ -45,5 +45,5 @@ availableSecrets:
 
 options:
   pool:
-    name: projects/$PROJET_ID/locations/us-central1/workerPools/private-pool
+    name: projects/$PROJECT_ID/locations/us-central1/workerPools/private-pool
 # [END cloudbuild_sql_private_pool]
