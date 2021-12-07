@@ -31,7 +31,7 @@ def test_dbconnect():
             now = conn.execute("SELECT NOW() as now").fetchone()
             print("Connection successful.")
     except Exception as ex:
-        print("Connection not successful: {}".format(ex))
+        print(f"Connection not successful: {ex}")
 
 
 def test_frontend(client):
