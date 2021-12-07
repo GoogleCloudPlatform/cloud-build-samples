@@ -32,6 +32,7 @@ steps:
   # [END cloudbuild_sql_proxy_layer]
 
   # [START cloudbuild_sql_proxy_tcp]
+  # For TCP connections
   - id: "migrate-tcp"
     name: "${_IMAGE_NAME}-proxy"
     dir: sql-proxy
@@ -49,6 +50,7 @@ steps:
   # [END cloudbuild_sql_proxy_tcp]
 
   # [START cloudbuild_sql_proxy_socket]
+  # For Unix Socket connections
   - id: "migrate-socket"
     name: "${_IMAGE_NAME}-proxy"
     dir: sql-proxy
