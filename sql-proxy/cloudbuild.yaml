@@ -39,14 +39,14 @@ steps:
     env:
       - "DATABASE_NAME=mydatabase"
       - "DATABASE_USER=myuser"
-      - "INSTANCE_CONNECTION_NAME=${_INSTANCE_CONNECTION_NAME}"
+      - "DATABASE_HOST=127.0.0.1"
     secretEnv:
       - DATABASE_PASS
     script:
       #!/bin/bash
-      /cloudsql/cloud_sql_proxy -instances=${_INSTANCE_CONNECTION_NAME}=tcp:0.0.0.0:5432 & sleep 2;
+      /cloudsql/cloud_sql_proxy -instances=${_INSTANCE_CONNECTION_NAME}=tcp:5432 & sleep 2;
 
-      DATABASE_HOST=0.0.0.0 python migrate.py # for example
+      python migrate.py # for example
   # [END cloudbuild_sql_proxy_tcp]
 
   # [START cloudbuild_sql_proxy_socket]
