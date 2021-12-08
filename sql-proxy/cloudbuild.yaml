@@ -66,6 +66,7 @@ steps:
 
       python migrate.py # for example
   # [END cloudbuild_sql_proxy_socket]
+
 options:
   dynamic_substitutions: true
 
