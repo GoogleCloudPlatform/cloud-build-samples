@@ -20,8 +20,6 @@ import sqlalchemy
 db_name = os.environ.get("DATABASE_NAME", None)
 db_user = os.environ.get("DATABASE_USER", None)
 db_pass = os.environ.get("DATABASE_PASS", None)
-db_socket_dir = os.environ.get("DATABASE_SOCKET_DIR", "/cloudsql")
-db_sql_connection = os.environ.get("INSTANCE_CONNECTION_NAME", None)
 
 
 ## Socket (for integrated connections)
