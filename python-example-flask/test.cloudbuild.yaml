@@ -2,6 +2,8 @@ steps:
   - id: test-builds-successfully
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     dir: python-example-flask/
+    env:
+      - 'SHORT_SHA=$SHORT_SHA'
     script: |
       gcloud builds submit --config cloudbuild.yaml \
       --substitutions SHORT_SHA=${SHORT_SHA},_REPO_NAME=${_REPO_NAME},_BUCKET_NAME=${_BUCKET_NAME}
