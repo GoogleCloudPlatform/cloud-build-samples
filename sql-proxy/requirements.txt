@@ -1,0 +1,19 @@
+flask>=2.0.0
+sqlalchemy
+cryptography
+
+
+# For website servings
+gunicorn
+
+# For unit testing
+pytest
+
+# For database connections
+
+pg8000==1.19.5 # for PostgreSQL
+
+# pymysql          # for MySQL
+
+# python-tds       # for MSSQL
+# sqlalchemy-pytds # for MSSQL

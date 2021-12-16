@@ -1,0 +1,22 @@
+<html>
+<title>{% if success == True %}Success{% else %}Error{%endif%}</title>
+<link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{%if success%}✅{%else%}❌{%endif%}</text></svg>">
+
+<style>
+    .message {
+        padding: 10px;
+        font-family: sans-serif;
+    }
+
+    .success {
+        background-color: rgb(160, 211, 160);
+    }
+
+    .failure {
+        background-color: rgb(247, 144, 144);
+    }
+</style>
+<div class="message {% if success == True %}success{%else%}failure{% endif %}">{{message}}</div>
+
+</html>
