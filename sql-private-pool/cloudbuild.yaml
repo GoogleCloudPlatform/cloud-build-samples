@@ -29,6 +29,7 @@ steps:
       - "DATABASE_NAME=mydatabase"
       - "DATABASE_USER=myuser"
       - "DATABASE_HOST=${_DATABASE_HOST}"
+      - "DATABASE_TYPE=${_DATABASE_TYPE}"
     secretEnv:
       - DATABASE_PASS
     entrypoint: python   # for example
@@ -41,6 +42,7 @@ options:
 
 substitutions:
   _DATABASE_PASSWORD_KEY: database_password
+  _DATABASE_TYPE: postgres
   _IMAGE_NAME: gcr.io/${PROJECT_ID}/sample-private-pool
 
 availableSecrets:
