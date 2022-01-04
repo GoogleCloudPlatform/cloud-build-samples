@@ -37,8 +37,8 @@ steps:
     name: "${_IMAGE_NAME}-proxy"
     dir: sql-proxy
     env:
-      - "DATABASE_NAME=mydatabase"
-      - "DATABASE_USER=myuser"
+      - "DATABASE_NAME=${_DATABASE_NAME}"
+      - "DATABASE_USER=${_DATABASE_USER}"
       - "DATABASE_HOST=127.0.0.1"
       - "DATABASE_PORT=${_DATABASE_PORT}"
       - "DATABASE_TYPE=${_DATABASE_TYPE}"
@@ -57,8 +57,8 @@ steps:
     name: "${_IMAGE_NAME}-proxy"
     dir: sql-proxy
     env:
-      - "DATABASE_NAME=mydatabase"
-      - "DATABASE_USER=myuser"
+      - "DATABASE_NAME=${_DATABASE_NAME}"
+      - "DATABASE_USER=${_DATABASE_USER}"
       - "INSTANCE_CONNECTION_NAME=${_INSTANCE_CONNECTION_NAME}"
       - "DATABASE_TYPE=${_DATABASE_TYPE}"
     secretEnv:
@@ -77,6 +77,8 @@ options:
   dynamic_substitutions: true
 
 substitutions:
+  _DATABASE_USER: myuser
+  _DATABASE_NAME: mydatabase
   _INSTANCE_CONNECTION_NAME: ${PROJECT_ID}:us-central1:myinstance
   _DATABASE_PORT: '5432'
   _DATABASE_TYPE: postgres
