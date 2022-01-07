@@ -1,6 +1,6 @@
 steps:
   - id: test-builds-successfully
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    dir: multiple-node-versions-example
     script: |
-      cd basic-config
-      gcloud builds submit --config cloudbuild.yaml --substitutions=_NODE_VERSION=17
+      gcloud builds submit --substitutions=_NODE_VERSION=17
