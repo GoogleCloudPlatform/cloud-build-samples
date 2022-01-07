@@ -20,18 +20,15 @@ import sqlalchemy
 db_name = os.environ.get("DATABASE_NAME", None)
 db_user = os.environ.get("DATABASE_USER", None)
 db_pass = os.environ.get("DATABASE_PASS", None)
+
+## Unix Socket settings
 db_socket_dir = os.environ.get("DATABASE_SOCKET_DIR", "/cloudsql")
 db_sql_connection = os.environ.get("INSTANCE_CONNECTION_NAME", None)
 
-
-## Socket (for integrated connections)
-db_socket_dir = os.environ.get("DATABASE_SOCKET_DIR", "/cloudsql")
-db_sql_connection = os.environ.get("INSTANCE_CONNECTION_NAME", None)
-
-## TCP (for local proxy)
+## TCP settings
 db_host = os.environ.get("DATABASE_HOST")
 db_port = os.environ.get("DATABASE_PORT", 5432)
-db_type = "postgres"
+db_type = os.environ.get("DATABASE_TYPE", "postgres")
 
 app = Flask(__name__)
 
@@ -40,8 +37,10 @@ def connect_db():
 
     # Helper for different database types
     sock_ext = ""
+    socket_name = "unix_socket"
     if db_type == "postgres":
-        sock_ext = f".s.PGSQL.{db_port}"
+        sock_ext = f"/.s.PGSQL.{db_port}"
+        socket_name = "unix_sock"
         drivername = "postgresql+pg8000"
     elif db_type == "mysql":
         drivername = "mysql+pymysql"
@@ -54,7 +53,7 @@ def connect_db():
         settings = {"host": db_host, "port": db_port}
     elif db_socket_dir and db_sql_connection:
         settings = {
-            "query": {"unix_sock": f"{db_socket_dir}/{db_sql_connection}/{sock_ext}"}
+            "query": {socket_name: f"{db_socket_dir}/{db_sql_connection}{sock_ext}"}
         }
     else:
         raise ValueError("No Socket/Dir nor Host/Port provided.")
@@ -76,7 +75,12 @@ def main():
     try:
         db = connect_db()
         with db.connect() as conn:
-            row = conn.execute("SELECT NOW() as now").fetchone()
+            if db_type == "mssql":
+                now_stmt = "SELECT getdate() as now"
+            else:
+                now_stmt = "SELECT NOW() as now"
+
+            row = conn.execute(now_stmt).fetchone()
             data = dict(row)
             return render_template(
                 "index.html",

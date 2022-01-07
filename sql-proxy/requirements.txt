@@ -13,7 +13,7 @@ pytest
 
 pg8000==1.19.5 # for PostgreSQL
 
-# pymysql          # for MySQL
+pymysql          # for MySQL
 
-# python-tds       # for MSSQL
-# sqlalchemy-pytds # for MSSQL
+python-tds       # for MSSQL
+sqlalchemy-pytds # for MSSQL
