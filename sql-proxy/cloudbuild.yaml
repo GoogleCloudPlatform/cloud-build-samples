@@ -25,6 +25,8 @@ steps:
   # [START cloudbuild_sql_proxy_layer]
   - id: "docker-layer"
     name: "gcr.io/cloud-builders/docker"
+    env:
+      - "_IMAGE_NAME=${_IMAGE_NAME}"
     script:
       #!/bin/bash
       echo "FROM ${_IMAGE_NAME}\nCOPY --from=gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
