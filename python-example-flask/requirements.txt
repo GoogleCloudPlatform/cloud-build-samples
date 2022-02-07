@@ -1,2 +1,2 @@
 Flask==2.0.2
-pytest==6.2.5
+pytest==7.0.0
