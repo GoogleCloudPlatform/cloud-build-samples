@@ -3,11 +3,17 @@ steps:
   - id: test-builds-successfully
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     dir: gradle-example
-    script: |
-      gcloud builds submit --config cloudbuild.yaml
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gcloud builds submit --config cloudbuild.yaml
       
   - id: cleanup
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    script: |
-      gcloud container images delete gcr.io/${PROJECT_ID}/hello-spring
+    entrypoint: /bin/bash
+    args: 
+      - '-c'
+      - |
+        gcloud container images delete gcr.io/${PROJECT_ID}/hello-spring
       
