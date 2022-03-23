@@ -57,7 +57,7 @@ artifacts:
     paths:
       - ${SHORT_SHA}_test_log.xml
 # [END cloudbuild_python_logs_yaml]
-# Store images in Google Artifact Registry
+# Store images in Google Artifact Registry 
 images:
   - us-central1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}
 # [END cloudbuild_python_yaml]
