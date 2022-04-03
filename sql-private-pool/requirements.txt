@@ -1,4 +1,4 @@
-flask==2.0.3
+flask==2.1.1
 sqlalchemy
 cryptography
 
