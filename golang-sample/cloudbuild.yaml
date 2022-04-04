@@ -15,7 +15,7 @@
 # [START cloudbuild_go_test_yaml]
 steps:
   # Run tests and save to file
-  - name: golang:1.17
+  - name: golang:1.18
     entrypoint: /bin/bash
     args: 
       - -c
