@@ -20,10 +20,8 @@ steps:
     args: 
       - -c
       - |
-        go get github.com/jstemmer/go-junit-report
-        go install github.com/jstemmer/go-junit-report
-        2>&1 go test -timeout 1m -v ./... | tee sponge.log
-        /go/bin/go-junit-report -set-exit-code < sponge.log > ${SHORT_SHA}_test_log.xml
+        go install github.com/jstemmer/go-junit-report/v2@latest
+        2>&1 go test -timeout 1m -v ./... | /go/bin/go-junit-report -set-exit-code -iocopy -out ${SHORT_SHA}_test_log.xml
   # [END cloudbuild_go_test_yaml]
   
   # [START cloudbuild_go_image_yaml]
