@@ -20,6 +20,6 @@ steps:
     entrypoint: mvn
     args: ["package", "-Dmaven.test.skip=true"]
   - name: gcr.io/cloud-builders/docker
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
-images: ["gcr.io/$PROJECT_ID/hellospring"]
+    args: ["build", "-t", "my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
+images: ["my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/hellospring"]
 # [END cloudbuild_maven]
