@@ -21,6 +21,6 @@ steps:
     entrypoint: gradle
     args: ["assemble"]
   - name: gcr.io/cloud-builders/docker
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/hello-spring", "--build-arg=JAR_FILE=build/libs/hellospring-1.0.0.jar", "."]
-images: ["gcr.io/$PROJECT_ID/hello-spring"]
+    args: ["build", "-t", "my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/hello-spring", "--build-arg=JAR_FILE=build/libs/hellospring-1.0.0.jar", "."]
+images: ["my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/hello-spring"]
 # [END cloudbuild_gradle]
