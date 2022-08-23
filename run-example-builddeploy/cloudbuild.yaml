@@ -16,13 +16,13 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/my_image', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/my_image', '.']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/my_image']
+  args: ['push', 'my_host_location-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/my_image']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'myservice', '--image', 'my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/my_image', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+  args: ['run', 'deploy', 'myservice', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/my_image', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 images:
-- my_host_location-docker.pkg.dev/$PROJECT_ID/my_repository/my_image
+- us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/my_image
 # [END cloudbuild_run_example_builddeploy]
