@@ -14,13 +14,13 @@
 
 # [START cloudbuild_gradle]
 steps:
-  - name: gradle:7.4.2-jdk8
+  - name: gradle:7.5.0-jdk8
     entrypoint: gradle
     args: ["test"]
-  - name: gradle:7.4.2-jdk8
+  - name: gradle:7.5.0-jdk8
     entrypoint: gradle
     args: ["assemble"]
   - name: gcr.io/cloud-builders/docker
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/hello-spring", "--build-arg=JAR_FILE=build/libs/hellospring-1.0.0.jar", "."]
-images: ["gcr.io/$PROJECT_ID/hello-spring"]
+    args: ["build", "-t", "us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/hello-spring", "--build-arg=JAR_FILE=build/libs/hellospring-1.0.0.jar", "."]
+images: ["us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/hello-spring"]
 # [END cloudbuild_gradle]
