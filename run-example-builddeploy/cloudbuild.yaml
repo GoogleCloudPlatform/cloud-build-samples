@@ -14,15 +14,38 @@
 
 # [START cloudbuild_run_example_builddeploy]
 steps:
-# Build the container image
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage', '.']
-# Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage']
-# Deploy container image to Cloud Run
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'myservice', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION_NAME}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/${_SERVICE_NAME}'
+      - '.'
+
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION_NAME}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/${_SERVICE_NAME}'
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE_NAME}'
+      - '--image'
+      - '${_REGION_NAME}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/${_SERVICE_NAME}'
+      - '--region'
+      - '${_REGION_NAME}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+substitutions:
+  _REGION_NAME: us-west1
+  _REPO_NAME: container-images
+  _SERVICE_NAME: public-web-cloud-run
 images:
-- us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage
+- '${_REGION_NAME}-docker.pkg.dev/$PROJECT_ID/${_REPO_NAME}/${_SERVICE_NAME}'
 # [END cloudbuild_run_example_builddeploy]
