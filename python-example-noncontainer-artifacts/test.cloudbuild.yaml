@@ -1,0 +1,20 @@
+steps:
+  - id: test-builds-successfully
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    dir: python-example-flask/
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gcloud builds submit --config cloudbuild.yaml \
+        --substitutions SHORT_SHA=${SHORT_SHA},_ARTIFACT_REGISTRY_REPO=${_ARTIFACT_REGISTRY_REPO},_BUCKET_NAME=${_BUCKET_NAME}
+
+  - id: cleanup
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gsutil rm gs://${_BUCKET_NAME}/${SHORT_SHA}_test_log.xml
+        gcloud artifacts docker images delete us-central1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}
+        gcloud run services delete helloworld-${SHORT_SHA} --region us-central1 --quiet

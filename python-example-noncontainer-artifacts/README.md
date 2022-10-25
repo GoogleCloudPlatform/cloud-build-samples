@@ -1,3 +1,2 @@
-# python-example
-Code examples used in Building Java applications
-https://cloud.google.com/build/docs/building/build-java
+# python-flask-example
+Code example used in [Building Python applications](https://cloud.google.com/build/docs/building/build-containerize-python). For instructions on running this code sample, see the documentation.
