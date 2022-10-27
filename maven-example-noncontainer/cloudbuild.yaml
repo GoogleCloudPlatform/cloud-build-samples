@@ -21,7 +21,7 @@ steps:
     args: ["package", "-Dmaven.test.skip=true"]
 artifacts:
   mavenArtifacts:
-  - repository: "https://us-central1-maven.pkg.dev/$PROJECT_ID/$_REPO_NAME"
+  - repository: "https://us-central1-maven.pkg.dev/$PROJECT_ID/$_ARTIFACT_REGISTRY_REPO"
     path: "/workspace/target/hello-spring-1.0.0.jar"
     artifactId: "hello-spring"
     groupId: "com.example"

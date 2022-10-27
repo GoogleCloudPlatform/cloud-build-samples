@@ -7,7 +7,7 @@ steps:
       - '-c'
       - |
         gcloud builds submit --config cloudbuild.yaml \
-        --substitutions _REPO_NAME=${_REPO_NAME}
+        --substitutions _ARTIFACT_REGISTRY_REPO=${_ARTIFACT_REGISTRY_REPO}
 
   - id: cleanup
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -15,4 +15,4 @@ steps:
     args:
       - '-c'
       - |
-        gcloud artifacts packages delete com.example:hello-spring --repository $_REPO_NAME --location us-central1
+        gcloud artifacts packages delete com.example:hello-spring --repository $_ARTIFACT_REGISTRY_REPO --location us-central1
