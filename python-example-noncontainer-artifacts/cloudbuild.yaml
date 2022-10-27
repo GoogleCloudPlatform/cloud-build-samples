@@ -46,8 +46,12 @@ artifacts:
     paths:
       - ${SHORT_SHA}_test_log.xml
 # [END cloudbuild_python_logs_yaml]
-# Store Python package in Google Artifact Registry 
+
+# [START cloudbuild_python_upload_yaml]
+# Store Python package in Artifact Registry
   pythonPackages:
     - repository: "https://us-central1-python.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_PYTHON_REPO}"
       paths: ["dist/*"]
+# [END cloudbuild_python_upload_yaml]
+   
 # [END cloudbuild_python_yaml]
