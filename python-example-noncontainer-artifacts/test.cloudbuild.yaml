@@ -1,7 +1,7 @@
 steps:
   - id: test-builds-successfully
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    dir: python-example-flask/
+    dir: python-example-noncontainer-artifacts/
     entrypoint: /bin/bash
     args:
       - '-c'
