@@ -15,4 +15,4 @@ steps:
     args:
       - '-c'
       - |
-        gcloud artifacts versions delete 1.1.0 -q --package com.example:hello-spring --repository $_ARTIFACT_REGISTRY_MAVEN_REPO --location us-central1
+        gcloud artifacts versions delete 1.0.0 -q --package com.example:hello-spring --repository $_ARTIFACT_REGISTRY_MAVEN_REPO --location us-central1
