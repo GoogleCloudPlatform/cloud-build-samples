@@ -35,7 +35,7 @@ steps:
   # Run unit tests
   - name: python
     entrypoint: python
-    args: ["-m", "pytest", "--junitxml=${_MY_IDENT}_test_log.xml"] 
+    args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"] 
   # [END cloudbuild_python_tests_yaml]
 
 # [START cloudbuild_python_logs_yaml]
@@ -44,7 +44,7 @@ artifacts:
   objects:
     location: gs://${_BUCKET_NAME}/
     paths:
-      - ${_MY_IDENT}_test_log.xml
+      - ${SHORT_SHA}_test_log.xml
 # [END cloudbuild_python_logs_yaml]
 # Store Python package in Google Artifact Registry 
   pythonPackages:
