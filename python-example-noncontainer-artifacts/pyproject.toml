@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-example-noncontainer-artifacts"
+version = "0.0.1"
+authors = [
+  { name="Chris McGoogle", email="chrismcgoogle@example.com" },
+]
+dependencies = [
+  'Flask',
+  'pytest',
+]
+description = "Hello World (Flask)"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/GoogleCloudPlatform/cloud-build-samples"
+"Bug Tracker" = "https://github.com/GoogleCloudPlatform/cloud-build-samples/issues"
