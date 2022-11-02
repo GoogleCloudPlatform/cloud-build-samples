@@ -1,0 +1,19 @@
+steps:
+  - id: test-builds-successfully
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    dir: python-example-noncontainer-artifacts/
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gcloud builds submit --config cloudbuild.yaml \
+        --substitutions SHORT_SHA=${SHORT_SHA},_ARTIFACT_REGISTRY_PYTHON_REPO=${_ARTIFACT_REGISTRY_PYTHON_REPO},_BUCKET_NAME=${_BUCKET_NAME}
+
+  - id: cleanup
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gsutil rm gs://${_BUCKET_NAME}/${SHORT_SHA}_test_log.xml
+        gcloud artifacts versions delete 0.0.1 -q --package python-example-noncontainer-artifacts --repository $_ARTIFACT_REGISTRY_PYTHON_REPO --location us-central1
