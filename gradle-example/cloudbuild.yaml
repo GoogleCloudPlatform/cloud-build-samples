@@ -14,10 +14,10 @@
 
 # [START cloudbuild_gradle]
 steps:
-  - name: gradle:7.5.0-jdk8
+  - name: gradle:7.5.1-jdk8
     entrypoint: gradle
     args: ["test"]
-  - name: gradle:7.5.0-jdk8
+  - name: gradle:7.5.1-jdk8
     entrypoint: gradle
     args: ["assemble"]
   - name: gcr.io/cloud-builders/docker
