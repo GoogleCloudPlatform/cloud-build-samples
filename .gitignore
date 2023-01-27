@@ -1,1 +1,41 @@
 .DS_Store
+
+### Java ##
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# jenv
+.java-version
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.checkstyle
+
+# Gradle
+build/
+out/
+bin/
+.gradle/
+
+# Intellij
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse files
+.project
+.classpath
+.settings
