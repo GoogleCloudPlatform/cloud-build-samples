@@ -1,0 +1,12 @@
+steps:
+
+- id: tf_destroy_target_state
+  name: "gcr.io/cloud-builders/gcloud"
+  env:
+    - "PROJECT_ID=$PROJECT_ID"
+  script: |
+    #!/bin/bash
+    set -e
+    source /workspace/lib/bash_utils.sh
+    tf_install_in_cloud_build_step
+    tf_destroy
