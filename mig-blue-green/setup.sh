@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 set -e
 
 BLUE='\033[1;34m'
@@ -144,8 +158,8 @@ steps:
     echo "Cloning demo source repo"
     mkdir /workspace/from/
     cd /workspace/from/
-    git clone $GIT_REPO
-    cd ./cloud-build-samples
+    git clone $GIT_REPO ./original
+    cd ./original
 
     echo "Cloning new empty repo"
     mkdir /workspace/to/
@@ -155,7 +169,7 @@ steps:
     cd ./copy-of-mig-blue-green
 
     echo "Making a copy"
-    cp -r /workspace/from/cloud-build-samples/mig-blue-green/* ./
+    cp -r /workspace/from/original/mig-blue-green/* ./
 
     echo "Setting git identity"
     git config user.email \
