@@ -35,7 +35,6 @@ steps:
 
       echo "Executing pipelines/apply.cloudbuild.yaml"
       gcloud builds submit \
-          . \
           --project=${_SANDBOX_PROJECT_NAME} \
           --config pipelines/apply.cloudbuild.yaml
 
@@ -79,7 +78,6 @@ steps:
 
       echo "Executing pipelines/destroy.cloudbuild.yaml"
       gcloud builds submit \
-          . \
           --project=${_SANDBOX_PROJECT_NAME} \
           --config pipelines/destroy.cloudbuild.yaml
 
