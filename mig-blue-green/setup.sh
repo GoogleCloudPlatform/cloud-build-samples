@@ -217,7 +217,7 @@ echo "> Waiting API enablement propagation"
 do_with_retry "(gcloud builds list --project "$PROJECT_ID" --quiet && gcloud compute instances list --project "$PROJECT_ID" --quiet && gcloud source repos list --project "$PROJECT_ID" --quiet) > /dev/null 2>&1" > /dev/null 2>&1
 
 echo "> Executing bootstrap job"
-gcloud builds submit \
+gcloud beta builds submit \
     --project "$PROJECT_ID" \
     --config ./bootstrap.cloudbuild.yaml \
     --no-source \

@@ -34,3 +34,6 @@ steps:
     set -e
     source /workspace/lib/bash_utils.sh
     describe_deployment
+
+tags:
+  - "mig-blue-green-apply"
