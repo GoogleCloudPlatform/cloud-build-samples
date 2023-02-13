@@ -82,9 +82,9 @@ gcloud source repos delete \
     --quiet || true
 
 echo "Deleting Cloud Build triggers"
-gcloud beta builds triggers delete \
+gcloud builds triggers delete \
     "destroy" --project "$PROJECT_ID" --quiet || true
-gcloud beta builds triggers delete \
+gcloud builds triggers delete \
     "apply" --project "$PROJECT_ID" --quiet || true
 
 echo -e "\n............................."

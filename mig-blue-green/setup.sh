@@ -192,8 +192,8 @@ steps:
     set -e
 
     echo "(Re)Creating destroy trigger"
-    gcloud beta builds triggers delete "destroy" --quiet || true
-    gcloud beta builds triggers create manual \
+    gcloud builds triggers delete "destroy" --quiet || true
+    gcloud builds triggers create manual \
         --name="destroy" \
         --repo="https://source.developers.google.com/p/$PROJECT_ID/r/copy-of-mig-blue-green" \
         --branch="master" \
@@ -202,8 +202,8 @@ steps:
         --quiet
 
     echo "(Re)Creating apply trigger"
-    gcloud beta builds triggers delete "apply" --quiet || true
-    gcloud beta builds triggers create cloud-source-repositories \
+    gcloud builds triggers delete "apply" --quiet || true
+    gcloud builds triggers create cloud-source-repositories \
         --name="apply" \
         --repo="copy-of-mig-blue-green" \
         --branch-pattern="master" \

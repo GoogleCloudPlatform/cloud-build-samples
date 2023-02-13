@@ -99,3 +99,6 @@ substitutions:
 
 tags:
   - "mig-blue-green-testing"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
