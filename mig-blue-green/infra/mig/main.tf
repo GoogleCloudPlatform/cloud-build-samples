@@ -104,7 +104,7 @@ resource "google_compute_instance_group_manager" "default" {
   base_instance_name = local.base_instance_name
   target_size        = 2
 
-  # NOTE: the name of this resource must be unique for eveey update;
+  # NOTE: the name of this resource must be unique for every update;
   #       this is wy we have a app_version in the name; this way
   #       new resource has a different name vs old one and both can
   #       exists at the same time
