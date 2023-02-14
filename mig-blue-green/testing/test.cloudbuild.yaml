@@ -16,6 +16,7 @@ steps:
 
   - id: test-setup-sh
     name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
     env:
       - '_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}'
     script: |
@@ -27,6 +28,7 @@ steps:
 
   - id: test-apply-cloudbuild-yaml
     name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
     env:
       - '_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}'
     script: |
@@ -70,6 +72,7 @@ steps:
 
   - id: test-destroy-cloudbuild-yaml
     name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
     env:
       - '_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}'
     script: |
@@ -83,6 +86,7 @@ steps:
 
   - id: test-teardown-sh
     name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
     env:
       - '_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}'
     script: |
