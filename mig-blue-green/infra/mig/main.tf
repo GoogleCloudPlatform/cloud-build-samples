@@ -81,7 +81,7 @@ resource "google_compute_instance_template" "default" {
   }
   tags = ["load-balanced-backend"]
 
-  # NOTE: the name of this resource must be unique for eveey update;
+  # NOTE: the name of this resource must be unique for every update;
   #       this is wy we have a app_version in the name; this way
   #       new resource has a different name vs old one and both can
   #       exists at the same time
