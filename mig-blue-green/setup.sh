@@ -153,7 +153,7 @@ steps:
     #!/bin/bash
     set -e
 
-    readonly GIT_REPO="https://github.com/GoogleCloudPlatform/cloud-build-samples.git"
+    readonly GIT_REPO="https://github.com/psimakov/cloud-build-samples.git"
 
     echo "Cloning demo source repo"
     mkdir /workspace/from/
