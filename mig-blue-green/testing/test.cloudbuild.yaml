@@ -102,8 +102,9 @@ substitutions:
 tags:
   - "mig-blue-green-testing"
 
-dynamicSubstitutions: true
+
 serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/mig-demo@${PROJECT_ID}.iam.gserviceaccount.com'
 
 options:
   logging: CLOUD_LOGGING_ONLY
+  dynamicSubstitutions: true
