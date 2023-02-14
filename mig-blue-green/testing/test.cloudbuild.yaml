@@ -102,5 +102,7 @@ substitutions:
 tags:
   - "mig-blue-green-testing"
 
+serviceAccount: mig-demo@${PROJECT_ID}.iam.gserviceaccount.com
+
 options:
   logging: CLOUD_LOGGING_ONLY
