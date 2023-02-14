@@ -30,7 +30,7 @@ steps:
       - '-c'
       - |
         echo "FROM $_IMAGE_NAME
-        COPY --from=gcr.io/cloudsql-docker/gce-proxy /cloud_sql_proxy /cloudsql/cloud_sql_proxy" > Dockerfile-proxy;
+        COPY --from=gcr.io/cloud-sql-connectors/cloud-sql-proxy /cloud-sql-proxy /cloudsql/cloud-sql-proxy" > Dockerfile-proxy;
 
         docker build -f Dockerfile-proxy -t ${_IMAGE_NAME}-proxy .
   # [END cloudbuild_sql_proxy_layer]
@@ -52,7 +52,7 @@ steps:
     args:
       - '-c'
       - |
-        /cloudsql/cloud_sql_proxy -instances=${_INSTANCE_CONNECTION_NAME}=tcp:${_DATABASE_PORT} & sleep 2;
+        /cloudsql/cloud-sql-proxy --port ${_DATABASE_PORT} ${_INSTANCE_CONNECTION_NAME} & sleep 2;
         python migrate.py # for example
   # [END cloudbuild_sql_proxy_tcp]
 
@@ -72,7 +72,7 @@ steps:
     args:
       - '-c'
       - |
-        /cloudsql/cloud_sql_proxy -instances=${_INSTANCE_CONNECTION_NAME} -dir=/cloudsql & sleep 2;
+        /cloudsql/cloud-sql-proxy --unix-socket /cloudsql ${_INSTANCE_CONNECTION_NAME} & sleep 2;
         if [ $_DATABASE_TYPE = 'mssql' ]; then echo "MSSQL doesn't support Unix Sockets. Skippng."; exit 0; fi;
         python migrate.py # for example.
   # [END cloudbuild_sql_proxy_socket]
