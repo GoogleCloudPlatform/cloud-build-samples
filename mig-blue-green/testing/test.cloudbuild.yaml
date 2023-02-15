@@ -103,4 +103,3 @@ tags:
 
 options:
   logging: CLOUD_LOGGING_ONLY
-  dynamicSubstitutions: true
