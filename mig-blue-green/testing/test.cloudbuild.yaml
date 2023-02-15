@@ -1,0 +1,105 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+  - id: test-setup-sh
+    name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
+    env:
+      - "_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      echo "Running setup.sh in ${_SANDBOX_PROJECT_NAME}"
+      bash setup.sh ${_SANDBOX_PROJECT_NAME} yes
+
+  - id: test-apply-cloudbuild-yaml
+    name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
+    env:
+      - "_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      echo "Executing pipelines/apply.cloudbuild.yaml"
+      gcloud builds submit \
+          --project=${_SANDBOX_PROJECT_NAME} \
+          --config pipelines/apply.cloudbuild.yaml
+
+  - id: test-deployment-is-live-and-serving
+    name: gcr.io/cloud-builders/gcloud
+    env:
+      - "_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      function test_endpoint() {
+        NAME="$1"
+        URL="$2"
+
+        echo "Testing $NAME at $URL"
+        curl --output $NAME.html --fail $URL
+        if grep -q "ns1-<br>hostname: ns1-$NAME-vm-" $NAME.html; then
+            echo "$NAME passed"
+        else
+            echo "$NAME failed:]\n$(cat $NAME.html)"
+        fi
+      }
+
+      readonly NS="ns1-"
+      readonly LB_URL="http://$(gcloud compute addresses describe ${NS}splitter-address-name --project=${_SANDBOX_PROJECT_NAME} --region=us-west1 --format='value(address)')/" \
+      readonly BLUE_URL="http://$(gcloud compute addresses describe ${NS}blue-address-name --project=${_SANDBOX_PROJECT_NAME} --region=us-west1 --format='value(address)')/" \
+      readonly GREEN_URL="http://$(gcloud compute addresses describe ${NS}green-address-name --project=${_SANDBOX_PROJECT_NAME} --region=us-west1 --format='value(address)')/"
+
+      test_endpoint blue $BLUE_URL
+      test_endpoint green $GREEN_URL
+      test_endpoint blue $LB_URL
+
+  - id: test-destroy-cloudbuild-yaml
+    name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
+    env:
+      - "_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      echo "Executing pipelines/destroy.cloudbuild.yaml"
+      gcloud builds submit \
+          --project=${_SANDBOX_PROJECT_NAME} \
+          --config pipelines/destroy.cloudbuild.yaml
+
+  - id: test-teardown-sh
+    name: gcr.io/cloud-builders/gcloud
+    dir: mig-blue-green
+    env:
+      - "_SANDBOX_PROJECT_NAME=${_SANDBOX_PROJECT_NAME}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      echo "Running teardown.sh in ${_SANDBOX_PROJECT_NAME}"
+      bash teardown.sh ${_SANDBOX_PROJECT_NAME} yes
+
+substitutions:
+  _SANDBOX_PROJECT_NAME: undefined
+
+tags:
+  - "mig-blue-green-testing"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
