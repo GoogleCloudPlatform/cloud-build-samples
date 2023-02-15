@@ -13,17 +13,16 @@
 # limitations under the License.
 
 steps:
-
-- id: run-terraform-destroy
-  name: "gcr.io/cloud-builders/gcloud"
-  env:
-    - "PROJECT_ID=$PROJECT_ID"
-  script: |
-    #!/bin/bash
-    set -e
-    source /workspace/lib/bash_utils.sh
-    tf_install_in_cloud_build_step
-    tf_destroy
+  - id: run-terraform-destroy
+    name: "gcr.io/cloud-builders/gcloud"
+    env:
+      - "PROJECT_ID=$PROJECT_ID"
+    script: |
+      #!/bin/bash
+      set -e
+      source /workspace/lib/bash_utils.sh
+      tf_install_in_cloud_build_step
+      tf_destroy
 
 tags:
   - "mig-blue-green-destroy"

@@ -13,21 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 variable "project" {
   type = string
 }
 
 variable "app_version" {
-  type    = string
+  type = string
 }
 
 variable "ns" {
-  type    = string
+  type = string
 }
 
 variable "color" {
-  type    = string
+  type = string
 }
 
 variable "google_compute_network" {
@@ -50,7 +50,7 @@ locals {
   l7-xlb-proxy                   = "${var.ns}${var.color}-l7-xlb-proxy"
   l7-xlb-forwarding-rule-colored = "${var.ns}${var.color}-l7-xlb-forwarding-rule-colored"
   l7-xlb-backend-template        = "${var.ns}${var.color}-l7-xlb-backend-template-${var.app_version}"
-  l7-xlb-group-manager         = "${var.ns}${var.color}-l7-xlb-group-manager-${var.app_version}"
+  l7-xlb-group-manager           = "${var.ns}${var.color}-l7-xlb-group-manager-${var.app_version}"
   base_instance_name             = "${var.ns}${var.color}-vm"
 }
 

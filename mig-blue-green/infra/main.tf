@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 variable "project" {
-  type = string
+  type        = string
   description = "GCP project we are working in."
 }
 
@@ -32,17 +32,17 @@ variable "ns" {
 }
 
 variable "MIG_VER_BLUE" {
-  type = string
+  type        = string
   description = "Version tag for 'blue' deployment."
 }
 
 variable "MIG_VER_GREEN" {
-  type = string
+  type        = string
   description = "Version tag for 'green' deployment."
 }
 
 variable "MIG_ACTIVE_COLOR" {
-  type = string
+  type        = string
   description = "Active color (blue | green)."
 }
 
@@ -59,8 +59,8 @@ module "blue" {
   source                               = "./mig"
   project                              = var.project
   app_version                          = var.MIG_VER_BLUE
-  ns                                   = "${var.ns}"
-  color                                 = "blue"
+  ns                                   = var.ns
+  color                                = "blue"
   google_compute_network               = module.splitter-lb.google_compute_network
   google_compute_subnetwork            = module.splitter-lb.google_compute_subnetwork_default
   google_compute_subnetwork_proxy_only = module.splitter-lb.google_compute_subnetwork_proxy_only
@@ -70,8 +70,8 @@ module "green" {
   source                               = "./mig"
   project                              = var.project
   app_version                          = var.MIG_VER_GREEN
-  ns                                   = "${var.ns}"
-  color                                 = "green"
+  ns                                   = var.ns
+  color                                = "green"
   google_compute_network               = module.splitter-lb.google_compute_network
   google_compute_subnetwork            = module.splitter-lb.google_compute_subnetwork_default
   google_compute_subnetwork_proxy_only = module.splitter-lb.google_compute_subnetwork_proxy_only
