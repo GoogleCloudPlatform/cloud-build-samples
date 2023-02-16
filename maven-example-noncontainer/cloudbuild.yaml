@@ -13,10 +13,10 @@
 # limitations under the License.
 # [START cloudbuild_maven]
 steps:
-  - name: maven:3.8-jdk-8
+  - name: maven:3-eclipse-temurin-17-alpine
     entrypoint: mvn
     args: ["test"]
-  - name: maven:3.8-jdk-8
+  - name: maven:3-eclipse-temurin-17-alpine
     entrypoint: mvn
     args: ["package", "-Dmaven.test.skip=true"]
 artifacts:
