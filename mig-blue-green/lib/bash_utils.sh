@@ -19,6 +19,7 @@ set -e
 readonly TF_CHDIR="/workspace/infra/"
 readonly BUCKET_NAME="${PROJECT_ID}-tf-state"
 
+# [START tf_install]
 function tf_install_in_cloud_build_step {
     echo "Installing deps"
     apt update
@@ -58,6 +59,7 @@ EOT_PROVIDER_TF
 
     echo "$(cat /workspace/infra/provider.tf)"
 }
+# [END tf_install]
 
 function tf_destroy {
     echo "Running Terraform init"
@@ -74,6 +76,7 @@ function tf_destroy {
         -var-file="main.tfvars"
 }
 
+# [START tf_apply]
 function tf_apply {
     echo "Running Terraform init"
     terraform \
@@ -88,7 +91,9 @@ function tf_apply {
         -var project="$PROJECT_ID" \
         -var-file="main.tfvars"
 }
+# [END tf_apply]
 
+# [START describe_deployment]
 function describe_deployment {
     NS="ns1-"
     echo -e "Deployment configuration:\n$(cat infra/main.tfvars)"
@@ -99,3 +104,4 @@ function describe_deployment {
       "\n\t* green color MIG: http://$(gcloud compute addresses describe ${NS}green-address-name --region=us-west1 --format='value(address)')/"
     echo "Good luck!"
 }
+# [END describe_deployment]
