@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+# [START terraform_variables]
 MIG_VER_BLUE     = "v1"
 MIG_VER_GREEN    = "v1"
 MIG_ACTIVE_COLOR = "blue"
+# [END terraform_variables]
