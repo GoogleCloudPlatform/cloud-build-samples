@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START destroy]
 steps:
   - id: run-terraform-destroy
     name: "gcr.io/cloud-builders/gcloud"
@@ -26,3 +27,4 @@ steps:
 
 tags:
   - "mig-blue-green-destroy"
+# [END destroy]
