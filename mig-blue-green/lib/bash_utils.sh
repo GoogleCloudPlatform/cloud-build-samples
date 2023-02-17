@@ -61,6 +61,7 @@ EOT_PROVIDER_TF
 }
 # [END tf_install]
 
+# [START tf_destroy]
 function tf_destroy {
     echo "Running Terraform init"
     terraform \
@@ -75,6 +76,7 @@ function tf_destroy {
         -var project="$PROJECT_ID" \
         -var-file="main.tfvars"
 }
+# [END tf_destroy]
 
 # [START tf_apply]
 function tf_apply {
