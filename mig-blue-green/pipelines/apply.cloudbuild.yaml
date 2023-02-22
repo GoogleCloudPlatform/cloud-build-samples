@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START apply]
+# [START cloudbuild_apply]
 steps:
   - id: run-terraform-apply
     name: "gcr.io/cloud-builders/gcloud"
@@ -37,4 +37,4 @@ steps:
 
 tags:
   - "mig-blue-green-apply"
-# [END apply]
+# [END cloudbuild_apply]
