@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START setup_script]
+# [START cloudbuild_setup_script]
 set -e
 
 BLUE='\033[1;34m'
@@ -239,4 +239,4 @@ echo -e "  * Cloud Build History: https://console.cloud.google.com/cloud-build/b
 echo -e "\n............................."
 
 echo -e "\n${GREEN}COMPLETED!${NC}"
-# [END setup_script]
+# [END cloudbuild_setup_script]
