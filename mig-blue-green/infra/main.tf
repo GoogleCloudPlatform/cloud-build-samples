@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-# [START terraform_settings]
+# [START cloudbuild_terraform_settings]
 variable "project" {
   type        = string
   description = "GCP project we are working in."
@@ -46,9 +46,9 @@ variable "MIG_ACTIVE_COLOR" {
   type        = string
   description = "Active color (blue | green)."
 }
-# [END terraform_settings]
+# [END cloudbuild_terraform_settings]
 
-# [START splitter_instantiation]
+# [START cloudbuild_splitter_instantiation]
 module "splitter-lb" {
   source               = "./splitter"
   project              = var.project
@@ -57,9 +57,9 @@ module "splitter-lb" {
   instance_group_blue  = module.blue.google_compute_instance_group_manager_default.instance_group
   instance_group_green = module.green.google_compute_instance_group_manager_default.instance_group
 }
-# [END splitter_instantiation]
+# [END cloudbuild_splitter_instantiation]
 
-# [START blue_green_instantiation]
+# [START cloudbuild_blue_green_instantiation]
 module "blue" {
   source                               = "./mig"
   project                              = var.project
@@ -81,4 +81,4 @@ module "green" {
   google_compute_subnetwork            = module.splitter-lb.google_compute_subnetwork_default
   google_compute_subnetwork_proxy_only = module.splitter-lb.google_compute_subnetwork_proxy_only
 }
-# [END blue_green_instantiation]
+# [END cloudbuild_blue_green_instantiation]
