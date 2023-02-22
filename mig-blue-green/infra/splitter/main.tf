@@ -120,7 +120,7 @@ resource "google_compute_region_health_check" "default" {
   unhealthy_threshold = 2
 }
 
-# [START blue_green_capacity]
+# [START cloudbuild_blue_green_capacity]
 resource "google_compute_region_backend_service" "default" {
   name                  = local.l7-xlb-backend-service
   region                = "us-west1"
@@ -140,7 +140,7 @@ resource "google_compute_region_backend_service" "default" {
     capacity_scaler = var.active_color == "green" ? 1 : 0
   }
 }
-# [END blue_green_capacity]
+# [END cloudbuild_blue_green_capacity]
 
 resource "google_compute_region_url_map" "default" {
   name            = local.regional-l7-xlb-map
