@@ -54,7 +54,7 @@ locals {
   base_instance_name             = "${var.ns}${var.color}-vm"
 }
 
-# [START create_before_destroy]
+# [START cloudbuild_create_before_destroy]
 resource "google_compute_instance_template" "default" {
   name = local.l7-xlb-backend-template
   disk {
@@ -106,7 +106,7 @@ resource "google_compute_instance_template" "default" {
     create_before_destroy = true
   }
 }
-# [END create_before_destroy]
+# [END cloudbuild_create_before_destroy]
 
 resource "google_compute_instance_group_manager" "default" {
   name = local.l7-xlb-group-manager
