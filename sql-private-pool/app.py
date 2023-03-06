@@ -68,7 +68,7 @@ def main():
             else:
                 now_stmt = "SELECT NOW() as now"
 
-            row = conn.execute(now_stmt).fetchone()
+            row = conn.execute(sqlalchemy.text(now_stmt)).scalar()
             data = dict(row)
             return render_template(
                 "index.html",

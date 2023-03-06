@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pytest
-from flask import Flask
-from app import connect_db
-
 import app
+import pytest
+import sqlalchemy
+from app import connect_db
+from flask import Flask
 
 
 @pytest.fixture
@@ -28,7 +28,7 @@ def test_dbconnect():
     db = app.connect_db()
     try:
         with db.connect() as conn:
-            now = conn.execute("SELECT NOW() as now").fetchone()
+            now = conn.execute(sqlalchemy.text("SELECT NOW() as now")).scalar()
             print("Connection successful.")
     except Exception as ex:
         print(f"Connection not successful: {ex}")

@@ -13,8 +13,9 @@
 # limitations under the License.
 
 import os
-import app
 
+import app
+import sqlalchemy
 
 db_type = os.environ.get("DATABASE_TYPE", "postgres")
 
@@ -28,7 +29,7 @@ def migrate():
         else:
             now_stmt = "SELECT NOW() as now"
 
-        row = conn.execute(now_stmt).fetchone()
+        row = conn.execute(sqlalchemy.text(now_stmt)).scalar()
         data = dict(row)
         print("Performed migration at", data["now"])
 
