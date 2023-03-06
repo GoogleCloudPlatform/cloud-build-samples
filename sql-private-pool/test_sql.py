@@ -28,7 +28,7 @@ def test_dbconnect():
     db = app.connect_db()
     try:
         with db.connect() as conn:
-            now = conn.execute(sqlalchemy.text("SELECT NOW() as now")).scalar()
+            _ = conn.execute(sqlalchemy.text("SELECT NOW() as now")).scalar()
             print("Connection successful.")
     except Exception as ex:
         print(f"Connection not successful: {ex}")
