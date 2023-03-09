@@ -1,0 +1,19 @@
+steps:
+  - id: test-builds-successfully
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    dir: run-example-builddeploy/
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gcloud builds submit --config cloudbuild.yaml \
+        --substitutions SHORT_SHA=${SHORT_SHA},_REPO_NAME=${_REPO_NAME}
+
+  - id: cleanup
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: /bin/bash
+    args: 
+      - '-c'
+      - |
+        gcloud artifacts docker images delete us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage
+        gcloud run services delete myservice --region us-central1 --quiet
