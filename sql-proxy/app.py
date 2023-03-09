@@ -80,12 +80,11 @@ def main():
             else:
                 now_stmt = "SELECT NOW() as now"
 
-            row = conn.execute(now_stmt).fetchone()
-            data = dict(row)
+            now = conn.execute(sqlalchemy.text(now_stmt)).scalar()
             return render_template(
                 "index.html",
                 success=True,
-                message=f"Successful connection. Database Time: {data['now']}",
+                message=f"Successful connection. Database Time: {now}",
             )
     except Exception as e:
         return (
