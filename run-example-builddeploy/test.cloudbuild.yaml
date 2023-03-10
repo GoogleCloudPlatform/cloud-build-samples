@@ -21,7 +21,7 @@ steps:
       - '-c'
       - |
         gcloud builds submit --config cloudbuild.yaml \
-        --substitutions _REPO_NAME=${_REPO_NAME}
+        --substitutions _REPO_NAME=${_REPO_NAME},SHORT_SHA=${SHORT_SHA}
 
   - id: cleanup
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -29,5 +29,5 @@ steps:
     args: 
       - '-c'
       - |
-        gcloud artifacts docker images delete us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage
+        gcloud artifacts docker images delete us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:${SHORT_SHA}
         gcloud run services delete myservice --region us-central1 --quiet
