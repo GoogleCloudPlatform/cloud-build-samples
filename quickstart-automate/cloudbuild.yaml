@@ -16,4 +16,7 @@
 steps:
   - name: golang
     args: ['go', 'run', 'quickstart-automate/main.go']
+options:
+  pool:
+    name: 'projects/aashishpatil-batch/locations/asia-east1/workerPools/batch-pr-privatepool'    
 # [END cloudbuild_quickstart_automate]
