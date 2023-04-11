@@ -4,7 +4,7 @@
 # review when someone opens a pull request.
 
 # Repo Owners
-*       @GoogleCloudPlatform/aap-dpes @nityaravi @glasnt
+*       @GoogleCloudPlatform/torus-dpe @nityaravi
 
 # Sample Owners
 mig-blue-green @psimakov
