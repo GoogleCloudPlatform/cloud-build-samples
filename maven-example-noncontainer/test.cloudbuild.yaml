@@ -1,6 +1,6 @@
 steps:
   - id: test-builds-successfully
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    name: gcr.io/cloud-builders/gcloud
     dir: maven-example-noncontainer/
     entrypoint: /bin/bash
     args:
@@ -9,8 +9,16 @@ steps:
         gcloud builds submit --config cloudbuild.yaml \
         --substitutions _ARTIFACT_REGISTRY_MAVEN_REPO=${_ARTIFACT_REGISTRY_MAVEN_REPO}
 
+  - id: test-exists
+    name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        gcloud artifacts versions describe 1.0.0 --package com.example:hello-spring --repository $_ARTIFACT_REGISTRY_MAVEN_REPO --location us-central1
+
   - id: cleanup
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
     args:
       - '-c'
