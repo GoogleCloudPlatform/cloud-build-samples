@@ -19,5 +19,5 @@ import (
 )
 
 func main () {
-  fmt.Println("Hello, DORA metrics demo!")
+  fmt.Println("Hello, ALK!")
 }
