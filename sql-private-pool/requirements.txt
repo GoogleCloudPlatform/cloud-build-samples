@@ -11,7 +11,7 @@ pytest
 
 # For database connections
 
-pg8000==1.29.4 # for PostgreSQL
+pg8000==1.29.8 # for PostgreSQL
 
 # pymysql          # for MySQL
 
