@@ -15,15 +15,10 @@
 # [START cloudbuild_quickstart_deploy]
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - 'run'
-  - 'deploy'
-  - 'cloudrunservice'
-  - '--image'
-  - 'us-docker.pkg.dev/cloudrun/container/hello'
-  - '--region'
-  - 'us-central1'
-  - '--platform'
-  - 'managed'
-  - '--allow-unauthenticated'
+  script: |
+    gcloud run deploy cloudrunservice \
+      --image us-docker.pkg.dev/cloudrun/container/hello \
+      --region us-central1 \
+      --platform managed \
+      --allow-unauthenticated'
 # [END cloudbuild_quickstart_deploy]
