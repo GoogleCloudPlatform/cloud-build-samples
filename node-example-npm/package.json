@@ -1,6 +1,7 @@
 {
   "name": "nodeapp",
   "version": "1.0.0",
+  "type": "module",
   "description": "my node app",
   "main": "index.js",
   "scripts": {

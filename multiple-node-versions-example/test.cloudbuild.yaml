@@ -4,6 +4,6 @@ steps:
     dir: multiple-node-versions-example
     entrypoint: /bin/bash
     args:
-      - '-c'
+      - "-c"
       - |
         gcloud builds submit --substitutions=_NODE_VERSION=17
