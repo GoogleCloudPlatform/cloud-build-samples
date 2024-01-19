@@ -39,3 +39,6 @@ bin/
 .project
 .classpath
 .settings
+
+# Node modules
+node_modules
