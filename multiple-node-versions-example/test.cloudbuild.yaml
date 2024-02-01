@@ -1,9 +1,0 @@
-steps:
-  - id: test-builds-successfully
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    dir: multiple-node-versions-example
-    entrypoint: /bin/bash
-    args:
-      - "-c"
-      - |
-        gcloud builds submit --substitutions=_NODE_VERSION=17
