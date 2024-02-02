@@ -17,6 +17,6 @@
   "devDependencies": {
     "chai": "5.0.3",
     "mocha": "10.2.0",
-    "supertest": "6.3.3"
+    "supertest": "6.3.4"
   }
 }
