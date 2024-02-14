@@ -1,16 +1,14 @@
-  - update-jira-status-on-successfull-deploy-to-stg:
-      call: http.post
-      args:
-          url: https://ramonmengarda.atlassian.net/rest/api/3/issue/${_JIRA_TICKET}/transitions
-          method: POST
-          headers:
-              "Accept": "application/json",
-              "Content-Type": "application/json"
-              "Authorization": "Basic 'ramon_hiago@hotmail.com:ATATT3xFfGF0bJUjxO841X_fydHMLXOiJp3yz85m4FZFDIDm-nxHMlfkLBC4W-q8b1b6Delkplh6A4lTjZzqrcBNxS1zRFCGPbPDGFZ4B7jOwQOYnKeT-tG0_wbqXCnn65k05w7l697g-YlmL5mV67S3Wu34PvKOdY-L3_VJNFs-aR84VjzekRg=8BFCFFD2'"
-          body:
-          {
-            "transition": {
-              "id": "61"
-            }
-          }
-    
+- get_message:
+    call: http.post
+    args:
+      url: https://ramonmengarda.atlassian.net/rest/api/3/issue/${_JIRA_TICKET}/transitions
+      headers:
+              Accept: "application/json"
+              Content-Type: "application/json"
+              Authorization: "Basic 'ramon_hiago@hotmail.com:ATATT3xFfGF0bJUjxO841X_fydHMLXOiJp3yz85m4FZFDIDm-nxHMlfkLBC4W-q8b1b6Delkplh6A4lTjZzqrcBNxS1zRFCGPbPDGFZ4B7jOwQOYnKeT-tG0_wbqXCnn65k05w7l697g-YlmL5mV67S3Wu34PvKOdY-L3_VJNFs-aR84VjzekRg=8BFCFFD2'"
+      body:
+        transition:
+          id: "61"
+    result: the_message
+- return_value:
+    return: ${the_message.body}
