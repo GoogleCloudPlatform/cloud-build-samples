@@ -23,7 +23,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     name = os.environ.get("NAME", "World")
-    return f"Hello {name}! RFM-23"
+    return f"Hello {name}! RFM-23 rerun"
 
 
 if __name__ == "__main__":
