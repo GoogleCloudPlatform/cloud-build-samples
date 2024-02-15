@@ -6,5 +6,5 @@ steps:
          '--header',
               'Content-Type: application/json',
          '--data',
-              '{"issues": [${_ISSUE_KEY}]'
+              '{"issues": ["${_ISSUE_KEY}"]'
         ]
