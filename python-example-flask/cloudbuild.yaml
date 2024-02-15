@@ -2,7 +2,7 @@ steps:
 - name: 'gcr.io/gcp-runtimes/ubuntu_18_0_4'
   entrypoint: 'curl'
   args: ['--location',
-              'https://automation.atlassian.com/pro/hooks/45c340ce8445993450eba79b86f21250bca724ae',
+              '${_WEBHOOK_LOCATION}',
          '--header',
               'Content-Type: application/json',
          '--data',
