@@ -2,15 +2,9 @@ steps:
 - name: 'gcr.io/gcp-runtimes/ubuntu_18_0_4'
   entrypoint: 'curl'
   args: ['--location',
-              'https://ramonmengarda.atlassian.net/rest/api/3/issue/RFM-4/transitions',
-         '--header',
-              'Accept: application/json',
+              'https://automation.atlassian.com/pro/hooks/45c340ce8445993450eba79b86f21250bca724ae',
          '--header',
               'Content-Type: application/json',
-         '--header',
-              'Authorization: Basic cmFtb25faGlhZ29AaG90bWFpbC5jb206QVRBVFQzeEZmR0YwYkpVanhPODQxWF9meWRITUxYT2lKcDN5ejg1bTRGWkZESURtLW54SE1sZmtMQkM0Vy1xOGIxYjZEZWxrcGxoNkE0bFRqWnpxcmNCTnhTMXpSRkNHUGJQREdGWjRCN2pPd1FPWW5LZVQtdEcwX3dicVhDbm42NWswNXc3bDY5N2ctWWxtTDVtVjY3UzNXdTM0UHZLT2RZLUwzX1ZKTkZzLWFSODRWanpla1JnPThCRkNGRkQy',
-         '--header',
-              'Cookie: atlassian.xsrf.token=2e37e649679df4da2cb3e7b634b08607f9da829f_lin',
          '--data',
-              '{"transition": { "id": "61" }}'
+              '{"issues": [${_ISSUE_KEY}]'
         ]
