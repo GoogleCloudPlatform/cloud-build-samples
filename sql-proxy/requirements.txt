@@ -1,5 +1,5 @@
-flask==3.0.1
-sqlalchemy==2.0.25
+flask==3.0.2
+sqlalchemy==2.0.28
 cryptography
 
 
@@ -11,7 +11,7 @@ pytest
 
 # For database connections
 
-pg8000==1.30.4 # for PostgreSQL
+pg8000==1.31.1 # for PostgreSQL
 
 pymysql          # for MySQL
 
