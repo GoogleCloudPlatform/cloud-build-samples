@@ -28,20 +28,20 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', '.']
+           'us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA', '.']
   # [END cloudbuild_go_image_yaml]
   
   # [START cloudbuild_go_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA']
   # [END cloudbuild_go_push_yaml]
   
   # [START cloudbuild_go_deploy_yaml]
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'helloworld-${SHORT_SHA}', 
-           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', 
+           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA', 
            '--region', 'us-central1', '--platform', 'managed']
   # [END cloudbuild_go_deploy_yaml]
 
@@ -55,5 +55,5 @@ artifacts:
 # [END cloudbuild_go_logs_yaml]
 # Store images in Google Artifact Registry
 images:
-  - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
+  - us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA
 # [END cloudbuild_go_yaml]
