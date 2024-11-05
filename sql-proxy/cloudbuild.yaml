@@ -89,7 +89,7 @@ substitutions:
   _DATABASE_PASSWORD_KEY: database_password
   _AR_REPO_REGION: us-central1
   _AR_REPO_NAME: my-docker-repo
-  _IMAGE_NAME: ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO_NAME}/sample-sql-proxy
+  _IMAGE_NAME: ${_AR_REPO_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO_NAME}/sample-sql-proxy
 
 availableSecrets:
   secretManager:
