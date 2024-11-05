@@ -78,7 +78,7 @@ steps:
   # [END cloudbuild_sql_proxy_socket]
 
 options:
-  dynamic_substitutions: true
+  dynamicSubstitutions: true
 
 substitutions:
   _DATABASE_USER: myuser
@@ -87,7 +87,9 @@ substitutions:
   _DATABASE_PORT: '5432'
   _DATABASE_TYPE: postgres
   _DATABASE_PASSWORD_KEY: database_password
-  _IMAGE_NAME: gcr.io/${PROJECT_ID}/sample-sql-proxy
+  _AR_REPO_REGION: us-central1
+  _AR_REPO_NAME: my-docker-repo
+  _IMAGE_NAME: ${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO_NAME}/sample-sql-proxy
 
 availableSecrets:
   secretManager:
