@@ -38,12 +38,14 @@ steps:
 options:
   pool:
     name: projects/$PROJECT_ID/locations/us-central1/workerPools/private-pool
-  dynamic_substitutions: true
+  dynamicSubstitutions: true
 
 substitutions:
   _DATABASE_PASSWORD_KEY: database_password
   _DATABASE_TYPE: postgres
-  _IMAGE_NAME: gcr.io/${PROJECT_ID}/sample-private-pool
+  _AR_REPO_REGION: us-central1
+  _AR_REPO_NAME: my-docker-repo
+  _IMAGE_NAME: ${_AR_REPO_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO_NAME}/sample-private-pool
 
 availableSecrets:
   secretManager:
