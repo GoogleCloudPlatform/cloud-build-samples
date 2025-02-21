@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START cloudbuild_firebase_deploy]
-steps: 
-- name: gcr.io/$PROJECT_ID/firebase
+steps:
+- name: us-docker.pkg.dev/$PROJECT_ID/containers/firebase
   args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']
 # [END cloudbuild_firebase_deploy]
