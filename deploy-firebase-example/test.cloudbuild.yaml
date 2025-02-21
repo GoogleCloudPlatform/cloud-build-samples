@@ -31,7 +31,7 @@ steps:
     args:
       - "-c"
       - |
-        gcloud container images delete $_FIREBASE_IMAGE_NAME --project $_TARGET_PROJECT
+        gcloud artifacts docker images delete $_FIREBASE_IMAGE_NAME --project $_TARGET_PROJECT
 
 options:
   dynamicSubstitutions: true

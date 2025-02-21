@@ -14,6 +14,6 @@
 
 # [START cloudbuild_firebase_deploy]
 steps:
-- name: us-docker.pkg.dev/$PROJECT_ID/containers/firebase
+- name: us-docker.pkg.dev/$PROJECT_ID/${_REGISTRY_NAME}/firebase
   args: ['deploy', '--project=$PROJECT_ID', '--only=hosting']
 # [END cloudbuild_firebase_deploy]
