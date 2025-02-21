@@ -3,27 +3,25 @@ steps:
     name: gcr.io/cloud-builders/git
     entrypoint: /bin/bash
     args:
-      - '-c'
+      - "-c"
       - git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
-
 
   - id: build-builder
     dir: cloud-builders-community/firebase
     name: gcr.io/cloud-builders/docker
     entrypoint: /bin/bash
     args:
-      - '-c'
+      - "-c"
       - |
         docker build . -t $_FIREBASE_IMAGE_NAME
         docker push $_FIREBASE_IMAGE_NAME
-
 
   - id: test-builds-successfully
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     dir: deploy-firebase-example/
     entrypoint: /bin/bash
     args:
-      - '-c'
+      - "-c"
       - |
         gcloud builds submit --config cloudbuild.yaml --project $_TARGET_PROJECT
 
@@ -31,9 +29,12 @@ steps:
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: /bin/bash
     args:
-      - '-c'
-      -  |
-         gcloud container images delete $_FIREBASE_IMAGE_NAME --project $_TARGET_PROJECT
+      - "-c"
+      - |
+        gcloud container images delete $_FIREBASE_IMAGE_NAME --project $_TARGET_PROJECT
+
+options:
+  dynamicSubstitutions: true
 
 substitutions:
   _FIREBASE_IMAGE_NAME: us-docker.pkg.dev/$PROJECT_ID/${_REGISTRY_NAME}/firebase
