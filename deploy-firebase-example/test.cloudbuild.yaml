@@ -1,14 +1,16 @@
 steps:
   - id: clone-builder
     name: gcr.io/cloud-builders/git
+    entrypoint: /bin/bash
     args:
       - '-c'
-      - clone https://github.com/GoogleCloudPlatform/cloud-builders-community
+      - git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
 
 
   - id: build-builder
     dir: cloud-builders-community/firebase
     name: gcr.io/cloud-builders/docker
+    entrypoint: /bin/bash
     args:
       - '-c'
       - |
