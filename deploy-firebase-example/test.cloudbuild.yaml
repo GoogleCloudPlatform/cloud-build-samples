@@ -37,4 +37,4 @@ options:
   dynamicSubstitutions: true
 
 substitutions:
-  _FIREBASE_IMAGE_NAME: us-docker.pkg.dev/${_TARGET_PROJECT}/${_REGISTRY_NAME}/firebase:$SHORT_SHA
+  _FIREBASE_IMAGE_NAME: us-docker.pkg.dev/${_TARGET_PROJECT}/${_REGISTRY_NAME}/firebase
