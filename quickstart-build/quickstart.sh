@@ -1,4 +1,3 @@
-#!/bin/sh
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,5 +13,6 @@
 # limitations under the License.
 
 # [START cloudbuild_quickstart_build_sh]
+#!/bin/sh
 echo "Hello, world! The time is $(date)."
 # [END cloudbuild_quickstart_build_sh]
