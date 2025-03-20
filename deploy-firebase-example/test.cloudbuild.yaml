@@ -1,27 +1,40 @@
 steps:
-  - id: clone-install-builder
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - id: clone-builder
+    name: gcr.io/cloud-builders/git
     entrypoint: /bin/bash
     args:
-      - '-c'
+      - "-c"
+      - git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
+
+  - id: build-builder
+    dir: cloud-builders-community/firebase
+    name: gcr.io/cloud-builders/docker
+    entrypoint: /bin/bash
+    args:
+      - "-c"
       - |
-        git clone https://github.com/GoogleCloudPlatform/cloud-builders-community.git
-        cd cloud-builders-community/firebase
-        gcloud builds submit . --project $_TARGET_PROJECT
+        docker build . -t $_FIREBASE_IMAGE_NAME
+        docker push $_FIREBASE_IMAGE_NAME
 
   - id: test-builds-successfully
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     dir: deploy-firebase-example/
     entrypoint: /bin/bash
     args:
-      - '-c'
+      - "-c"
       - |
         gcloud builds submit --config cloudbuild.yaml --project $_TARGET_PROJECT
 
   - id: cleanup-builder-image
     name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: /bin/bash
-    args: 
-      - '-c'
-      -  |
-         gcloud container images delete gcr.io/$_TARGET_PROJECT/firebase --project $_TARGET_PROJECT
+    args:
+      - "-c"
+      - |
+        gcloud artifacts docker images delete $_FIREBASE_IMAGE_NAME --project $_TARGET_PROJECT
+
+options:
+  dynamicSubstitutions: true
+
+substitutions:
+  _FIREBASE_IMAGE_NAME: us-docker.pkg.dev/${_TARGET_PROJECT}/${_REGISTRY_NAME}/firebase
