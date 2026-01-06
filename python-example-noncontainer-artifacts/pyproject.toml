@@ -24,3 +24,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/GoogleCloudPlatform/cloud-build-samples"
 "Bug Tracker" = "https://github.com/GoogleCloudPlatform/cloud-build-samples/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/"]
