@@ -1,3 +1,3 @@
 module github.com/GoogleCloudPlatform/cloud-build-samples/run-example-builddeploy
 
-go 1.19
+go 1.24
