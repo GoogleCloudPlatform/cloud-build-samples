@@ -26,4 +26,4 @@ classifiers = [
 "Bug Tracker" = "https://github.com/GoogleCloudPlatform/cloud-build-samples/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/"]
+force-include = { "src/main.py" = "main.py" }
