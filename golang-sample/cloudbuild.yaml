@@ -15,33 +15,33 @@
 # [START cloudbuild_go_test_yaml]
 steps:
   # Run tests and save to file
-  - name: golang:1.24
+  - name: golang:1.24-trixie
     entrypoint: /bin/bash
-    args: 
+    args:
       - -c
       - |
         go install github.com/jstemmer/go-junit-report/v2@latest
         2>&1 go test -timeout 1m -v ./... | /go/bin/go-junit-report -set-exit-code -iocopy -out ${SHORT_SHA}_test_log.xml
   # [END cloudbuild_go_test_yaml]
-  
+
   # [START cloudbuild_go_image_yaml]
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
+    args: ['build', '-t',
            'us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA', '.']
   # [END cloudbuild_go_image_yaml]
-  
+
   # [START cloudbuild_go_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA']
   # [END cloudbuild_go_push_yaml]
-  
+
   # [START cloudbuild_go_deploy_yaml]
   # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'helloworld-${SHORT_SHA}', 
-           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA', 
+    args: ['run', 'deploy', 'helloworld-${SHORT_SHA}',
+           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_AR_REPO_NAME/myimage:$SHORT_SHA',
            '--region', 'us-central1', '--platform', 'managed']
   # [END cloudbuild_go_deploy_yaml]
 
