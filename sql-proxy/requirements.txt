@@ -1,5 +1,5 @@
 flask==3.1.2
-sqlalchemy==2.0.44
+sqlalchemy==2.0.47
 cryptography
 
 
