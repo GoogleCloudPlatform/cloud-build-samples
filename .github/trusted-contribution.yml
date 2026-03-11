@@ -4,3 +4,4 @@ annotations:
 trustedContributors:
   - renovate-bot
   - dpebot
+  - dependabot[bot]
